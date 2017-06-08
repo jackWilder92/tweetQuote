@@ -1,3 +1,3 @@
 <?php
-    echo "Hello There"
+    echo "Posting to twitter"
 ?>
