@@ -1,0 +1,8 @@
+# Turn rewrite engine on
+Options +FollowSymlinks
+RewriteEngine on
+
+DirectoryIndex apiAccess.php
+
+# map neat URL to internal URL
+RewriteRule ^post/tweet/$ index.php
