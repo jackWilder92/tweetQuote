@@ -19,5 +19,10 @@ if(!isset($_SESSION['access_token'])) {
     $access_token = $_SESSION['access_token'];
     $connection = new TwitterOAuth(CONSUMER_KEY,CONSUMER_SECRET,$access_token['oauth_token'],$access_token['oauth_token_secret']);
     $user = $connection -> get("account/verify_credentials");
-    echo $user->status->text;
+    
+    $random = rand(1,8);
+    #$post = $connection -> post('statuses/update',array('status' => 'tweet it'));
+    $mediaUp = $connection -> upload('media/upload',['media' => './pictures/'.$random.'.jpg']);
+    #print_r($mediaUp);
+    $tweet = $connection -> post('statuses/update',['media_ids' => $mediaUp->media_id, 'status' => 'Image Tweeting']);
 }
