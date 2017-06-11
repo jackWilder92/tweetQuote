@@ -24,22 +24,26 @@ else {
     $connection = new TwitterOAuth(CONSUMER_KEY,CONSUMER_SECRET,$access_token['oauth_token'],$access_token['oauth_token_secret']);
     $user = $connection -> get("account/verify_credentials");
     
+    $countall = glob('./pictures/*.jpg');
+    $countpost = glob('./pictures2/*.jpg');
+    
     $flag = true;
     while ($flag) {
         $random = rand(1,9);
         $media = $random.'.jpg';
+        if((count($countall)==count($countpost))){
+            echo "No unique pitures available";
+            break;
+        }
         if (!file_exists('./pictures2/'.$media)) {
+            $mediaUp = $connection -> upload('media/upload',['media' =>'./pictures/'.$media]);
+            $tweet = $connection -> post('statuses/update',['media_ids' => $mediaUp->media_id, 'status' => 'Image Tweeting']);
+            copy('./pictures/'.$media,'./pictures2/'.$media);
+            echo '<img src = "./pictures/'.$media.'"alt="'.$media.'"/>';
+            echo "Image posted.....";
             $flag = false;
         }
-        else {
-            echo "Tweet exist ".$media."\n";
-        }
     }
-    $mediaUp = $connection -> upload('media/upload',['media' =>'./pictures/'.$media]);
-    $tweet = $connection -> post('statuses/update',['media_ids' => $mediaUp->media_id, 'status' => 'Image Tweeting']);
-    copy('./pictures/'.$media,'./pictures2/'.$media);
-    echo '<img src = "./pictures/'.$media.'"alt="'.$media.'"/>';
-    echo "Image posted.....";
 }
 
 function delete_files($target) {
