@@ -1,5 +1,5 @@
 <?php
-define('CONSUMER_KEY','n7VHAXUcnfjtw3XAdTCXZps18');
-define('CONSUMER_SECRET','B78SOLezqtFLGdYqn8SmsEMflzkcLIO8ewWMfKyZWO2mSoSVuo');
+define('CONSUMER_KEY','CONSUMER KEY');
+define('CONSUMER_SECRET','Consumer Secret');
 define('OAUTH_CALLBACK','http://localhost/tweetQuote/callback.php');
 ?>
